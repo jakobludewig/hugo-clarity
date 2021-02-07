@@ -1,11 +1,11 @@
 <div class="post_meta">
-  {{ $author := index .Site.Data.authors (.Params.author | default "naturalblogarithm") }}
-  {{- if $author -}}
-      {{ partial "svg/author.svg" (dict "class" "meta_icon") -}}
-      <a href='{{ absLangURL (printf "author/%s" $author.stub) }}'>
-        {{- $author.name }}
-      </a>
-  {{- end -}}
+  {{ range $author_elem := .Params.authors}}
+    {{ partial "svg/author.svg" (dict "class" "meta_icon") -}}
+    {{ $author := index $.Site.Data.authors ($author_elem | default "naturalblogarithm") }}
+    <a href='{{ absLangURL (printf "authors/%s" $author.stub) }}'>
+      {{- $author.name }}
+    </a>
+  {{ end }}
 
   {{ if ( ne .Params.showDate false ) }}
     {{ partial "sprite" (dict "icon" "calendar") }}
