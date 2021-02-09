@@ -5,6 +5,9 @@
 {{- else }}
   {{ $scratch.Set "image" .Site.Params.fallBackOgImage }}
 {{- end }}
+{{ if or .Params.math .Site.Params.math }}
+{{ partial "math.html" . }}
+{{ end }}
 {{- $image := $scratch.Get "image" }}
 {{- $bg := (path.Join "images" $image | absLangURL) }}
 <div class="grid-inverse wrap content">
